@@ -1,6 +1,8 @@
 import './index.css';
 import './questionnaire/script.js';
 import './results/script.js';
+import './board/applicants.css';
+import {startAnimation} from './board/applicants'
 
 
 // function navigateTo(pageUrl) {

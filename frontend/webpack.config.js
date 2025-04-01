@@ -68,6 +68,18 @@ module.exports = {
       chunks: ['main']
     }),
 
+    new HtmlWebpackPlugin({
+      template: './src/board/applicants.html',
+      filename: 'applicants.html',
+      chunks: ['main']
+    }),
+
+    new HtmlWebpackPlugin({
+      template: './src/board/invited.html',
+      filename: 'invited.html',
+      chunks: ['main']
+    }),
+
     // Аналогично, если нужно board.html, results.html и т.д.
   ]
 }

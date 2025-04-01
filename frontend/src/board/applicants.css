@@ -1,0 +1,253 @@
+._body {
+    font-family: Arial, sans-serif;
+    position: relative;
+    background-color: #e8eef1;
+
+}
+
+._cards {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    gap: 60px;
+    margin-left: 100px;
+}
+
+._logo {
+    position: absolute;
+    width: 185px;
+    height: 87px;
+    top: 20px;
+    left: 20px;
+}
+
+._card {
+    flex-shrink: 0;
+    background-color: #b6e235;
+    padding: 20px;
+    width: 800px;
+    height: 400px;
+    border-radius: 10px;
+    position: relative;
+}
+
+._title {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+._name {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+._text {
+    font-size: 20px;
+    margin-right: 100px;
+    color: #333;
+}
+
+._quote {
+    position: absolute;
+    font-size: 20px;
+    right: -30px;
+    top: 140px;
+    font-style: italic;
+    transform: rotate(90deg);
+}
+
+._invite {
+    position: absolute;
+    left: -60px;
+    bottom: 40px;
+    background-color: #e26b6b;
+    color: white;
+    padding: 10px 30px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    transform: translate(-4px, 15px) rotate(45deg);
+}
+
+._invite:hover {
+    background-color: #f52121;
+    animation: shake-invite 1s infinite alternate;
+}
+
+._invite:active {
+    background-color: #f49494;
+}
+
+@keyframes shake-invite {
+    0% {
+        transform: translate(-3px, 14px) rotate(50deg);
+    }
+
+    33% {
+        transform: translate(-3px, 16px) rotate(40deg);
+    }
+
+    66% {
+        transform: translate(-5px, 16px) rotate(50deg);
+    }
+
+    100% {
+        transform: translate(-5px, 14px) rotate(40deg);
+    }
+}
+
+._profile-img {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+
+._button-invited {
+    background-color: #e26b6b;
+    flex-shrink: 0;
+    color: white;
+    padding: 10px 30px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+._button-invited:hover {
+    background-color: #f52121;
+    animation: spin-button-invited 3s linear infinite;
+}
+
+._button-invited:active {
+    background-color: #f49494;
+}
+
+@keyframes spin-button-invited {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+._emptiness {
+    display: block;
+    width: 200px;
+    color: transparent
+}
+
+/*стили для invited*/
+._body-invited {
+    background-color: #e6ebef;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+._h1-invited {
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 37%;
+    color: #336DFD;
+    margin: 0 auto;
+    padding: 50px 0;
+    text-align: center;
+}
+
+._ovals {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    position: relative;
+    height: 800px;
+}
+
+._oval {
+    display: flex;
+    align-items: center;
+    background-color: #c5ea52;
+    border-radius: 100px;
+    padding: 20px;
+    width: 600px;
+    position: absolute;
+    opacity: 0;
+}
+
+._oval-content {
+    padding: 20px;
+}
+
+._h2-invited {
+    margin: 0;
+    font-size: 40px;
+}
+
+._p-invited {
+    margin: 5px 0;
+    font-size: 24px;
+}
+
+._profile-img-invited {
+    border-radius: 50%;
+    bottom: 30px;
+    height: 140px;
+    position: absolute;
+    right: 20px;
+    width: 140px;
+}
+
+@keyframes moveUp {
+
+    0%{
+        bottom: 0;
+        opacity: 0;
+    }
+
+    5%{
+        bottom: 5%;
+        opacity: 1;
+    }
+
+    95% {
+        bottom: 85%;
+        opacity: 1;
+    }
+
+    100% {
+        bottom: 90%;
+        opacity: 0;
+    }
+}
+
+._button-invited-more {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 150px;
+    background-color: #e26b6b;
+    color: white;
+    padding: 10px 30px;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+}
+
+._button-invited-more:hover {
+    background-color: #f52121;
+}
+
+._button-invited-more:active {
+    background-color: #f49494;
+}
