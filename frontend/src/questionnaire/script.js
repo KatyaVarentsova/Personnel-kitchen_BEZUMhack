@@ -1,3 +1,4 @@
+
 const pages = document.querySelectorAll(".container");
 (function () {
   const questions = [
@@ -13,19 +14,24 @@ const pages = document.querySelectorAll(".container");
 
   let currentQuestionIndex = 0;
   const container = document.getElementById("question-container");
+  const answers = [];
+
 
   const userProfile = {
-    type: "candidate",   // Default type (можно изменить позже)
+    type: "candidate",   // Default type (can be updated later)
     selected: false,
     name: "",
     email: "",
     password: "",
-    answers: []          // Массив для сохранения ответов на остальные вопросы
+    answers: [{}]          // Array to store all answers
   };
+
+
+
 
   // Функция для отображения текущего вопроса
   function showQuestion() {
-    container.innerHTML = "";
+    container.innerHTML = ""; 
 
     // Если остались вопросы, отображаем их
     if (currentQuestionIndex < questions.length) {
@@ -35,17 +41,7 @@ const pages = document.querySelectorAll(".container");
       container.appendChild(questionDiv);
 
       const inputField = document.createElement("input");
-      // Генерируем уникальный id для input
-      inputField.id = `input-question-${currentQuestionIndex}`;
-
-      // Меняем тип input в зависимости от вопроса
-      if (currentQuestionIndex === 1) {
-        inputField.type = 'password';
-      } else if (currentQuestionIndex === 3) {
-        inputField.type = 'email';
-      } else {
-        inputField.type = 'text';
-      }
+      inputField.type = "text";
       inputField.placeholder = "Введите ваш ответ здесь...";
       container.appendChild(inputField);
 
@@ -57,7 +53,7 @@ const pages = document.querySelectorAll(".container");
       const submitButton = document.createElement("button");
       submitButton.textContent = "Ответить";
 
-      // Кнопка "Назад"
+      // Кнопка отмены
       const backButton = document.createElement("button");
       backButton.textContent = "Назад";
       backButton.addEventListener("click", function () {
@@ -80,25 +76,14 @@ const pages = document.querySelectorAll(".container");
         ];
 
         if (answerText === "") {
-          alert("Так-так-так куда это мы спешим, сначала введите ответ, иначе выпишем штраф за превышение скорости");
+          alert("Так-так-так куда это мы спешим, сначала введите ответ, иначе выпишем штраф за превыщение скорости");
           return;
         } else {
           const randomIndex = Math.floor(Math.random() * arr.length);
           const randomValue = arr[randomIndex];
           alert(randomValue);
         }
-        
-        // Сохраняем ответ в userProfile по соответствующим полям
-        if (currentQuestionIndex === 1) {
-          userProfile.password = answerText;
-        } else if (currentQuestionIndex === 2) {
-          userProfile.name = answerText;
-        } else if (currentQuestionIndex === 3) {
-          userProfile.email = answerText;
-        } else {
-          userProfile.answers.push(answerText);
-        }
-
+        answers.push(answerText);
         inputField.disabled = true;
         submitButton.disabled = true;
 
@@ -119,26 +104,7 @@ const pages = document.querySelectorAll(".container");
       finalButton.className = "finalButton";
       finalButton.textContent = "С вами все понятно, нет смысла продолжать... Перейти к результатам теста";
       finalButton.addEventListener("click", function () {
-        // Выполняем POST-запрос на сервер с отправкой объекта userProfile
-        fetch("https://example.com/api/results", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(userProfile)
-        })
-          .then(response => {
-            if (response.ok) {
-              // После успешной отправки переходим к странице результатов
-              window.location.href = "results.html";
-            } else {
-              alert("Произошла ошибка при отправке данных на сервер.");
-            }
-          })
-          .catch(error => {
-            console.error("Ошибка:", error);
-            alert("Произошла ошибка при отправке данных на сервер.");
-          });
+        window.location.href='results.html'
       });
       container.appendChild(finalButton);
     }
