@@ -2,19 +2,30 @@ const pages = document.querySelectorAll(".container");
 (function () {
   const questions = [
     "С какой ноги вы обычно начинаете свой рабочий день и почему именно с этой?",
-    // "Какой напиток лучше отражает ваше отношение к дедлайнам: бодрящий эспрессо или успокаивающий чай?",
-    // "Представьте, что каждый новый проект начинается с визита к гадалке. Какой вопрос вы бы ей задали?",
-    // "Представьте себя на месте офисной кофемашины, которая в курсе всех последних сплетен, как бы она вас охарактеризовала одним словом?",
-    // "Вы когда-нибудь оборачивались посмотреть не обернулась ли она, чтобы посмотреть не обернулись ли вы?"
+    "Введите пароль, рекомендуем использовать пароль от 'Госуслуг'",
+    "ФИО",
+    "email",
+    "Какой напиток лучше отражает ваше отношение к дедлайнам: бодрящий эспрессо или успокаивающий чай?",
+    "Представьте, что каждый новый проект начинается с визита к гадалке. Какой вопрос вы бы ей задали?",
+    "Представьте себя на месте офисной кофемашины, которая в курсе всех последних сплетен, как бы она вас охарактеризовала одним словом?",
+    "Вы когда-нибудь оборачивались посмотреть не обернулась ли она, чтобы посмотреть не обернулись ли вы?"
   ];
 
   let currentQuestionIndex = 0;
   const container = document.getElementById("question-container");
-  const answers = [];
+
+  const userProfile = {
+    type: "candidate",   // Default type (можно изменить позже)
+    selected: false,
+    name: "",
+    email: "",
+    password: "",
+    answers: []          // Массив для сохранения ответов на остальные вопросы
+  };
 
   // Функция для отображения текущего вопроса
   function showQuestion() {
-    container.innerHTML = ""; 
+    container.innerHTML = "";
 
     // Если остались вопросы, отображаем их
     if (currentQuestionIndex < questions.length) {
@@ -24,7 +35,17 @@ const pages = document.querySelectorAll(".container");
       container.appendChild(questionDiv);
 
       const inputField = document.createElement("input");
-      inputField.type = "text";
+      // Генерируем уникальный id для input
+      inputField.id = `input-question-${currentQuestionIndex}`;
+
+      // Меняем тип input в зависимости от вопроса
+      if (currentQuestionIndex === 1) {
+        inputField.type = 'password';
+      } else if (currentQuestionIndex === 3) {
+        inputField.type = 'email';
+      } else {
+        inputField.type = 'text';
+      }
       inputField.placeholder = "Введите ваш ответ здесь...";
       container.appendChild(inputField);
 
@@ -36,7 +57,7 @@ const pages = document.querySelectorAll(".container");
       const submitButton = document.createElement("button");
       submitButton.textContent = "Ответить";
 
-      // Кнопка отмены
+      // Кнопка "Назад"
       const backButton = document.createElement("button");
       backButton.textContent = "Назад";
       backButton.addEventListener("click", function () {
@@ -59,14 +80,25 @@ const pages = document.querySelectorAll(".container");
         ];
 
         if (answerText === "") {
-          alert("Так-так-так куда это мы спешим, сначала введите ответ, иначе выпишем штраф за превыщение скорости");
+          alert("Так-так-так куда это мы спешим, сначала введите ответ, иначе выпишем штраф за превышение скорости");
           return;
         } else {
           const randomIndex = Math.floor(Math.random() * arr.length);
           const randomValue = arr[randomIndex];
           alert(randomValue);
         }
-        answers.push(answerText);
+        
+        // Сохраняем ответ в userProfile по соответствующим полям
+        if (currentQuestionIndex === 1) {
+          userProfile.password = answerText;
+        } else if (currentQuestionIndex === 2) {
+          userProfile.name = answerText;
+        } else if (currentQuestionIndex === 3) {
+          userProfile.email = answerText;
+        } else {
+          userProfile.answers.push(answerText);
+        }
+
         inputField.disabled = true;
         submitButton.disabled = true;
 
@@ -87,8 +119,26 @@ const pages = document.querySelectorAll(".container");
       finalButton.className = "finalButton";
       finalButton.textContent = "С вами все понятно, нет смысла продолжать... Перейти к результатам теста";
       finalButton.addEventListener("click", function () {
-        // Здесь можно обработать сохранение ответов и перейти на страницу результатов
-        window.location.href='results.html'
+        // Выполняем POST-запрос на сервер с отправкой объекта userProfile
+        fetch("https://example.com/api/results", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(userProfile)
+        })
+          .then(response => {
+            if (response.ok) {
+              // После успешной отправки переходим к странице результатов
+              window.location.href = "results.html";
+            } else {
+              alert("Произошла ошибка при отправке данных на сервер.");
+            }
+          })
+          .catch(error => {
+            console.error("Ошибка:", error);
+            alert("Произошла ошибка при отправке данных на сервер.");
+          });
       });
       container.appendChild(finalButton);
     }
@@ -105,22 +155,6 @@ const pages = document.querySelectorAll(".container");
       }, 2000);
     }
   }
-
-  // Оставляем MutationObserver, если он нужен для динамических переключений (для MPA, возможно, не потребуется)
-  // const observer = new MutationObserver(() => {
-  //   const isQuestionnaireVisible = document
-  //     .getElementById("page-questionnaire")
-  //     .classList.contains("active");
-
-  //   if (isQuestionnaireVisible && currentQuestionIndex === 0) {
-  //     showQuestion();
-  //   }
-  // });
-
-  // observer.observe(document.getElementById("page-questionnaire"), {
-  //   attributes: true,
-  //   attributeFilter: ["class"]
-  // });
 
   document.addEventListener("DOMContentLoaded", () => {
     const questionnairePage = document.getElementById("page-questionnaire");

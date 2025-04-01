@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
   entry: {
@@ -49,7 +51,6 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
     
-    // Генерируем index.html
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
@@ -80,6 +81,15 @@ module.exports = {
       chunks: ['main']
     }),
 
-    // Аналогично, если нужно board.html, results.html и т.д.
+    new HtmlWebpackPlugin({
+      template: './src/success/success.html',
+      filename: 'success.html',
+      chunks: ['main']
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/images', to: 'images' }
+      ]
+    })
   ]
 }

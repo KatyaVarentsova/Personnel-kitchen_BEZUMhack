@@ -1,46 +1,46 @@
 @import url('./board/applicants.css');
 
 body {
-  background-color: #ECF0F7;
-  background-image: url('./images/desktop.png');
-  background-size: contain;     /* масштабирование, чтобы изображение покрывало весь фон */
-  background-position: center;  /* центрирование изображения */
-  background-repeat: no-repeat; /* чтобы изображение не повторялось */
+  background-color: #ecf0f7;
+  background-image: url("./images/desktop.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  .container {
-    background: #fff;
-    background: transparent;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 600px;
-    width: 90%;
-    text-align: center;
-  }
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  background: #fff;
+  background: transparent;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+}
 
-  .header {
-    color: #336DFD;
-    display: flex;
-    font-size: 40px;
-  }
+.header {
+  color: #336dfd;
+  display: flex;
+  font-size: 40px;
+}
 
-  .personality {
-    color: #EF5C5C;
-    font-size: 60px;
-    margin-top: 0%;
-  }
+.personality {
+  color: #ef5c5c;
+  font-size: 60px;
+  margin-top: 0%;
+}
 
-  .text {
-    color: #336DFD;
-    font-size: 20px;
-  }
+.text {
+  color: #336dfd;
+  font-size: 20px;
+}
 
   .question {
     font-size: 20px;
@@ -90,31 +90,122 @@ body {
     font-weight: bold;
   }
 
-  .agree-button {
-    background-color: #cbe957;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    font-family: inherit;
-    margin-top: 20px;
-    transition: transform 0.2s ease;
-  }
-  
-  /* Пример эффекта при наведении, если нужно */
-  .agree-button:hover {
-    transform: scale(1.05);
-  }
+.question {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+.answer {
+  font-size: 18px;
+  color: #333;
+  margin: 15px 0;
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 4px;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+button {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: rgba(239, 92, 92, 0.5);
+}
 
-  .tooltip {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 4px;
-    font-size: 14px;
-    white-space: nowrap;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-  }
-  
+.finalButton {
+  width: 100%;
+  height: 50px;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+.back-message {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #EF5C5C;
+  font-weight: bold;
+}
+
+.agree-button {
+  background-color: #cbe957;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 20px;
+  transition: transform 0.2s ease;
+}
+
+.agree-button:hover {
+  transform: scale(1.05);
+}
+
+.tooltip {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+
+.popup {
+  position: absolute;
+  width: 300px; /* фиксированная ширина */
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
+}
+
+.popup-blocker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 950;
+}
+.popup.active {
+  opacity: 1;
+  visibility: visible;
+}
+/* Кнопка закрытия попапа */
+.popup-close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+}
+.popup-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.popup-text {
+  font-size: 16px;
+}
