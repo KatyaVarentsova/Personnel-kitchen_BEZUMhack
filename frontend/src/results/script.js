@@ -1,4 +1,3 @@
-// Массив с типами личности
 const personalityTypes = [
   {
     type: "Кекс с изюмом",
@@ -128,8 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const agreeButton = document.getElementById("agree-button");
-
-  // Функция для показа тултипа
   function showTooltip() {
     const tooltip = document.createElement("div");
     tooltip.className = "tooltip";
@@ -141,8 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
     tooltip.style.left = buttonRect.left + "px";
     tooltip.style.top = (buttonRect.top - 30) + "px";
     tooltip.style.zIndex = "1000";
-
-    // Удаляем тултип через 1 секунду
     setTimeout(() => {
       tooltip.remove();
     }, 1000);
