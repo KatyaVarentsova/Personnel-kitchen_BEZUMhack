@@ -3,21 +3,24 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Заголовок страницы</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <title>Кадровая кухня</title>
+    <link rel="stylesheet" href="./index.css">
 
     <meta property="og:title" content="Заголовок страницы">
     <meta property="og:description" content="Описание страницы">
   </head>
   <body>
     <header>
-      <h1>Hello!</h1>
     </header>
     <main>
-      
+      <div class="container" id="page-role">
+        <p>А вы кто?</p>
+        <!-- <button onclick="navigateTo('page-questionnaire')">Соискатель</button> -->
+
+        <button onclick="window.location.href='questionnaire.html'">Соискатель</button>
+        <button onclick="navigateTo('page-board')">Работодатель</button>
+      </div>
     </main>
-    <footer>
-      
-    </footer>
+    <script src="index.js" defer></script>
   </body>
 </html>

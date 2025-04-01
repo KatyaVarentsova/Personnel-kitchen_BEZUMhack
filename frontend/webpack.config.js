@@ -10,14 +10,17 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
-    publicPath: '',
+    publicPath: '/',
   },
   mode: 'development',
   devServer: {
-    static: path.resolve(__dirname, './dist'),
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
     open: true,
     compress: true,
-    port: 8080
+    port: 8080,
+    historyApiFallback: false
   },
   module: {
     rules: [{
@@ -43,11 +46,28 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html'
-    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
+    
+    // Генерируем index.html
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+      chunks: ['main'] 
+    }),
 
+    new HtmlWebpackPlugin({
+      template: './src/questionnaire/questionnaire.html',
+      filename: 'questionnaire.html',
+      chunks: ['main']
+    }),
+
+    new HtmlWebpackPlugin({
+      template: './src/results/results.html',
+      filename: 'results.html',
+      chunks: ['main']
+    }),
+
+    // Аналогично, если нужно board.html, results.html и т.д.
   ]
 }
