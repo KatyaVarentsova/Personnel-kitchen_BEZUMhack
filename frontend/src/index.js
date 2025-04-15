@@ -2,6 +2,7 @@ import './index.css';
 import './questionnaire/script.js';
 import './results/script.js';
 import './success/script.js';
+/*import './board/applicants.js';*/
 
 document.addEventListener("DOMContentLoaded", () => {
   if (window.location.pathname === "/" || window.location.pathname.includes("index.html")) {
@@ -121,3 +122,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+function startAnimation() {
+  const ovals = document.querySelectorAll('.oval');
+  console.log('10')
+  ovals.forEach((oval, index) => {
+      setTimeout(() => {
+          oval.style.animation = 'moveUp 7s linear infinite';
+      }, index * 7000); 
+  });
+}
+startAnimation();

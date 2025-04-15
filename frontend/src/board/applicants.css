@@ -178,8 +178,8 @@
     border-radius: 100px;
     padding: 20px;
     width: 600px;
-    position: absolute;
-    opacity: 0;
+    opacity: 1;
+    gap: 100px;
 }
 
 ._oval-content {
